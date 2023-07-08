@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Player</title>
+
+   <script src="https://kit.fontawesome.com/55b646fe91.js" crossorigin="anonymous"></script>
+   <style>
+      @import url("https://fonts.googleapis.com/css2?family=Unica+One&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+      * {
+         margin: 0px;
+         padding: 0px;
+         box-sizing: border-box;
+         font-family: "Unica One", cursive;
+         transition: 1.2s ease-in-out;
+         outline: none;
+         -webkit-user-select: none;
+         -moz-user-select: none;
+         user-select: none;
+         scroll-behavior: smooth;
+      }
+
+      body {
+         background-color: #070618;
+         padding: 0px 10px;
+         width: 100%;
+         height: 100%;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         flex-direction: column;
+      }
+
+      ::-webkit-scrollbar {
+         width: 0px;
+      }
+
+      .main {
+         width: 99%;
+         height: 100vh;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+
+      }
+
+      .container {
+
+         width: 100%;
+
+         height: 100%;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+
+         gap: 10px;
+      }
+
+      .container .main-video-container {
+
+         max-width: 70%;
+         min-width: 70%;
+
+         max-height: 90%;
+         min-height: 90%;
+         border-radius: 10px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         background-color: rgb(255, 255, 255, 0.1);
+         padding: 15px;
+      }
+
+      .container .main-video-container .main-video {
+         margin-bottom: 7px;
+         border-radius: 5px;
+         width: 100%;
+      }
+
+      .container .main-video-container .main-vid-title {
+         font-size: 20px;
+         color: #FE7C7C;
+      }
+
+      .container .video-list-container {
+
+         max-width: 30%;
+         min-width: 30%;
+
+         max-height: 90%;
+         min-height: 90%;
+         overflow-y: scroll;
+         border-radius: 5px;
+
+         background-color: rgb(255, 255, 255, 0.1);
+         padding: 15px;
+      }
+
+
+
+      .container .video-list-container .list {
+         display: flex;
+         align-items: center;
+
+         gap: 15px;
+         padding: 10px;
+         /* background-color: #eee; */
+         background-color: rgb(255, 255, 255, 0.1);
+         cursor: pointer;
+         border-radius: 5px;
+         margin-bottom: 10px;
+      }
+
+      .container .video-list-container .list:last-child {
+         margin-bottom: 0;
+      }
+
+      .container .video-list-container .list.active {
+         background-color: #FE7C7C;
+      }
+
+      .container .video-list-container .list.active .list-title {
+         color: #070618;
+      }
+
+      .container .video-list-container .list .list-video {
+         width: 100px;
+         border-radius: 5px;
+      }
+
+      .container .video-list-container .list .list-title {
+         font-size: 15px;
+         color: white;
+         font-weight: 200;
+         font-family: poppins;
+      }
+
+      .container2 {
+         width: 90%;
+         margin: auto;
+      }
+
+      .container2 h1 {
+         color: #FE7C7C;
+      }
+
+      .container2 p {
+         color: grey;
+         font-family: poppins;
+         text-align: justify;
+      }
+
+      .container2 .btn {
+         text-decoration: none;
+         color: #070618;
+         font-family: poppins;
+         font-weight: 800;
+         padding: 10px 20px;
+         background-color: #FE7C7C;
+         margin-top: 50px;
+      }
+
+      .back {
+         position: absolute;
+         width: 40px;
+         height: 40px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         top: 10px;
+         text-decoration: none;
+         left: 10px;
+         color: #FE7C7C;
+         padding: 10px;
+         border: 2px solid #FE7C7C;
+         border-radius: 50%;
+         z-index: 10000000000000;
+      }
+
+      h2 {
+         color: #FE7C7C;
+         font-size: 20px;
+      }
+
+      .cont {
+         display: flex;
+         align-items: center;
+         color: white;
+         gap: 40px;
+      }
+
+      @media (max-width:1500px) {
+         .container .main-video-container {
+            min-height: auto;
+            max-height: fit-content;
+         }
+
+         .container .video-list-container {
+            max-height: auto;
+            min-height: auto;
+         }
+
+         .main {
+            height: fit-content;
+            margin-top: 100px;
+         }
+      }
+
+      @media (max-width:1050px) {
+         body {
+            padding: 2px;
+         }
+
+         .main {
+            width: 100%;
+         }
+
+         .container {
+            flex-direction: column;
+         }
+
+         .container .main-video-container .main-video {
+            margin: 0px;
+         }
+
+         .container .main-video-container {
+            max-width: 100%;
+            min-width: 100%;
+            min-height: auto;
+            max-height: fit-content;
+            padding: 2px;
+         }
+
+         .container .video-list-container {
+            max-width: 100%;
+            min-width: 100%;
+         }
+
+      }
+   </style>
+</head>
+
+<body>
+   <a href="/" class="back"><i class="fa-solid fa-arrow-left"></i></a>
+
+   <!-- <br> -->
+   <!-- <br> -->
+   <div class="main">
+      <div class="container">
+         <div class="main-video-container">
+            <video src="images/vid-1.mp4" controls  poster="/media/{{data.ser_poster}}" class="main-video"></video>
+            <!-- <h3 class="main-vid-title">house flood animation</h3> -->
+         </div>
+
+
+         <div class="video-list-container">
+            {% for i in video  %}
+            <div class="list active">
+               <video src="/media/{{i.1}}"  poster="/media/{{data.ser_poster}}" class="list-video"></video>
+               <h3 class="list-title">{{ data.ser_name }} Episode {{i.0|add:1}}</h3>
+            </div>
+            {% endfor %}
+            {% comment %} {% for i in l|get_range  %}
+            <div class="list active">
+               <video src="/media/{{video.i}}" poster="/media/{{data.ser_poster}}" class="list-video"></video>
+               <h3 class="list-title">{{video}} {{ data.ser_name }} Episode {{i|add:1}}</h3>
+            </div>
+            {% endfor %} {% endcomment %}
+         
+
+            
+
+         </div>
+      </div>
+   </div>
+
+
+   <br>
+
+   <div class="container2">
+      <h1>{{data.ser_name}}</h1>
+      <p>{{data.ser_desc}}</p>
+      <br>
+      <div class="cont">
+         <h2>Category</h2>
+         <p>
+            {% for i in data.ser_cat %}
+               {{i}} &nbsp;
+            {% endfor %}
+         </p>
+      </div>
+      <br>
+      <br>
+
+      <a href="{{data.ser_trailer}}" target='_blank' class="btn">Watch Trailer</a>
+   </div>
+
+   <br>
+   <br>
+   <br>
+   <br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <!-- custom js file link  -->
+   <script>
+      let videoList = document.querySelectorAll('.video-list-container .list');
+
+      videoList.forEach(vid => {
+         vid.onclick = () => {
+            videoList.forEach(remove => { remove.classList.remove('active') });
+            vid.classList.add('active');
+            let src = vid.querySelector('.list-video').src;
+            let title = vid.querySelector('.list-title').innerHTML;
+            document.querySelector('.main-video-container .main-video').src = src;
+            document.querySelector('.main-video-container .main-video').play();
+            document.querySelector('.main-video-container .main-vid-title').innerHTML = title;
+         };
+      });
+   </script>
+
+</body>
+
+</html>

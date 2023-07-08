@@ -1,0 +1,607 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/55b646fe91.js" crossorigin="anonymous"></script>
+    <title>Movies</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Unica+One&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: "Unica One", cursive;
+            transition: 1.2s ease-in-out;
+            outline: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            background-color: #070618;
+            overflow-x: hidden;
+        }
+
+        .nav {
+            width: 100%;
+            height: 70px;
+            padding: 24px;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .nav .nav-title {
+            font-family: "Unica One";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 38px;
+            color: #FFFFFF;
+        }
+
+        .nav .nav-title .nav-title-sub {
+            font-family: "Poppins", sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 21px;
+            color: #FE7C7C;
+        }
+
+        .nav .nav-rest {
+            position: absolute;
+            right: 2%;
+            gap: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav .nav-rest .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            list-style-type: none;
+            color: white;
+        }
+
+        .nav .nav-rest .nav-links .link {
+            cursor: pointer;
+        }
+
+        .nav .nav-rest .nav-links .link:hover {
+            color: #FE7C7C;
+        }
+
+        .nav .nav-rest .nav-menu {
+            color: #FE7C7C;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 1s ease-in-out;
+            border: 1px solid #FE7C7C;
+            border-radius: 50%;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        .nav .nav-rest .nav-menu.open {
+            color: white;
+            border: 1px solid white;
+            transform: rotateZ(180deg);
+        }
+
+        .nav .menu-cont {
+            position: absolute;
+            width: 10px;
+            height: 100vh;
+            background-color: #FE7C7C;
+            right: 0;
+            top: 0;
+            overflow-y: scroll;
+            border-radius: 80px;
+            transform: translateY(-100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 65px;
+            padding-bottom: 10px;
+        }
+
+        .nav .menu-cont.open {
+            transform: translateX(0);
+            border-radius: 0;
+            width: 300px;
+        }
+
+        .nav .menu-cont .menu-cont-itms {
+            width: 90%;
+            height: 90vh;
+            transition: 1s ease-in-out;
+            transform: translateY(-100%);
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            list-style-type: none;
+            padding-top: 5px;
+            gap: 8px;
+        }
+
+        .nav .menu-cont .menu-cont-itms.open {
+            transform: translateY(0);
+        }
+
+        .nav .menu-cont .menu-cont-itms li {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .nav .menu-cont .menu-cont-itms li .search {
+            display: flex;
+            width: 90%;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 10px;
+            background-color: white;
+            border-radius: 20px;
+        }
+
+        .nav .menu-cont .menu-cont-itms li .search input {
+            border: none;
+            width: 85%;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .nav .menu-cont .menu-cont-itms li .itm {
+            width: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px 15px;
+            background-color: rgba(7, 6, 24, 0.3);
+            border-radius: 8px;
+            color: white;
+            gap: 16px;
+        }
+
+        .nav .menu-cont .menu-cont-itms li .upload {
+            background-color: white;
+            width: 90%;
+            height: 80px;
+            border-radius: 16px;
+            display: flex;
+            padding-top: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #FE7C7C;
+        }
+
+        main {
+            width: 100%;
+            height: 100%;
+            padding-top: 90px;
+            margin-bottom: 40px;
+        }
+
+        main .container {
+            width: 90%;
+            height: 100%;
+            margin: auto;
+            color: white;
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        main .container .lst-mov-itm {
+            width: 99%;
+            min-height: 400px;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding-top: 10px;
+            border-radius: 10px;
+        }
+
+        main .container .lst-mov-itm .hed {
+            width: 100%;
+            height: 10%;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            padding-left: 20px;
+        }
+
+        main .container .lst-mov-itm .hed .more {
+            display: flex;
+            height: 100%;
+            padding-bottom: 5px;
+            align-items: end;
+            font-size: 12px;
+            color: #FE7C7C;
+            text-decoration: none;
+        }
+
+        main .container .lst-mov-itm .hed .scroll {
+            margin-left: auto;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            color: #FE7C7C;
+        }
+
+        main .container .lst-mov-itm .hed .scroll i {
+            cursor: pointer;
+        }
+
+        main .container .lst-mov-itm .cnt {
+            width: 100%;
+            height: 90%;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            padding-right: 20px;
+            gap: 20px;
+            overflow-x: scroll;
+            transition: 1s ease-in-out;
+            border: none;
+        }
+
+        main .container .lst-mov-itm .cnt .cat-cnt-itm {
+            min-width: 250px;
+            max-width: 250px;
+            height: 85%;
+            color: black;
+            list-style-type: none;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        main .container .lst-mov-itm .cnt .cat-cnt-itm .txt {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: auto;
+            margin-bottom: 12px;
+            border-radius: 2px;
+            word-wrap: break-word;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        main .container .lst-mov-itm .cnt .cnt-itm {
+            min-width: 200px;
+            max-width: 200px;
+            height: 85%;
+            color: black;
+            list-style-type: none;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        main .container .lst-mov-itm .cnt .cnt-itm .txt {
+            background-color: #fe7c7c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: auto;
+            margin-bottom: 6px;
+            margin-left: auto;
+            margin-right: 6px;
+            border-radius: inherit;
+            padding: 5px 10px;
+            word-wrap: break-word;
+            font-size: 11px;
+            color: black;
+            font-family: poppins;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px;
+        }
+
+        @media only screen and (max-width: 660px) {
+            .nav .nav-rest .nav-links {
+                display: none;
+            }
+        }
+
+        @media only screen and (max-width: 420px) {
+            .nav .menu-cont {
+                width: 10%;
+            }
+
+            .nav .menu-cont.open {
+                width: 100%;
+            }
+        }
+
+        /*# sourceMappingURL=style.css.map */
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="nav-title">
+            Movies.<span class="nav-title-sub">watch</span>
+        </div>
+        <div class="nav-rest">
+            <ul class="nav-links">
+                <li class="link" onclick="navigation('')">Home</li>
+                <li class="link" onclick="navigation('categories')">Categories</li>
+                <li class="link" onclick="navigation('movies')">Movies</li>
+                <li class="link" onclick="navigation('series')">Seires</li>
+                <li class="link">Search</li>
+            </ul>
+            <div class="nav-menu"><i class="fa-solid fa-bars"></i></div>
+        </div>
+        <div class="menu-cont">
+            <ul class="menu-cont-itms">
+                <br>
+                <li>
+                    <div class="search">
+                        <input type="text" placeholder="Search ..." name="search" id="">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </li>
+                <br>
+                <li onclick="navigation(' ')">
+                    <div class="itm">
+                        <i class="fa-solid fa-house"></i> Home
+                    </div>
+                </li>
+                <li onclick="navigation('categories')">
+                    <div class="itm">
+                        <i class="fa-solid fa-shapes"></i> Categories
+                    </div>
+                </li>
+                <li onclick="navigation('movies')">
+                    <div class="itm" >
+                        <i class="fa-solid fa-film"></i> Movies
+                    </div>
+                </li>
+                <li onclick="navigation('series')">
+                    <div class="itm">
+                        <i class="fa-solid fa-tv"></i> Series
+                    </div>
+                </li>
+                <br>
+                <li>
+                    <div class="itm">
+                        <i class="fa-solid fa-bookmark"></i> Watch Later
+                    </div>
+                </li>
+                <li>
+                    <div class="itm">
+                        <i class="fa-solid fa-thumbs-up"></i> Liked
+                    </div>
+                </li>
+                <li onclick="navigation('logout')">
+                    <div class="itm">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                    </div>
+                </li>
+                <br>
+                <li onclick="navigation('upload')">
+                    <div class="upload">
+                        <i class="fa-solid fa-cloud-arrow-up fa-2xl"></i><br>
+                        Upload
+                    </div>
+                </li>
+                <br>
+                <br>
+                <br>
+                <br>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <main class="home">
+        <div class="container">
+            <div class="lst-mov-itm">
+                <div class="hed">Categories.
+                    <a href="categories" class="more">more</a>
+                    <span class="scroll"><i id="b" class="fa-solid fa-chevron-left fa-xs"></i> &nbsp; &nbsp;<i id="n"
+                            class="fa-solid fa-chevron-right fa-xs"></i></span>
+                </div>
+                <ul class="cnt">
+                    <li onclick="navigation('categories/Action')" class="cat-cnt-itm" style="background-image: url('{% static '/action.jpeg' %}');">
+                        <span class="txt">Action</span>
+                    </li>
+                    <li onclick="navigation('categories/Adventure')" class="cat-cnt-itm" style="background-image: url('{% static '/adventure.png' %}');">
+                        <span class="txt">Adventure</span>
+                    </li>
+                    <li onclick="navigation('categories/Animation')" class="cat-cnt-itm" style="background-image: url('{% static '/animation.jpeg' %}');">
+                        <span class="txt">Animation</span>
+                    </li>
+                    <li onclick="navigation('categories/COmedy')" class="cat-cnt-itm" style="background-image: url('{% static '/comedy.jpeg' %}');">
+                        <span class="txt">Comedy</span>
+                    </li>
+                    <li onclick="navigation('categories/Crime')" class="cat-cnt-itm" style="background-image: url('{% static '/crime.jpeg' %}');">
+                        <span class="txt">Crime</span>
+                    </li>
+                    <li onclick="navigation('categories/Drama')" class="cat-cnt-itm" style="background-image: url('{% static '/drama.jpeg' %}');">
+                        <span class="txt">Drama</span>
+                    </li>
+                    <li onclick="navigation('categories/DOcumentary')" class="cat-cnt-itm"
+                        style="background-image: url('{% static '/documentary.jpeg' %}');">
+                        <span class="txt">Documentary</span>
+                    </li>
+                    <li onclick="navigation('categories/Fantasy')" class="cat-cnt-itm"
+                        style="background-image: url('{% static '/fantasy.jpeg' %}');">
+                        <span class="txt">Fantasy</span>
+                    </li>
+                    <li onclick="navigation('categories/Historical')" class="cat-cnt-itm"
+                        style="background-image: url('{% static '/historical.png' %}');">
+                        <span class="txt">Historical</span>
+                    </li>
+                    <li onclick="navigation('categories/Horror')" class="cat-cnt-itm"
+                        style="background-image: url('{% static '/horror.jpeg' %}');">
+                        <span class="txt">Horror</span>
+                    </li>
+                    <li onclick="navigation('categories/Mystery')" class="cat-cnt-itm"
+                        style="background-image: url('{% static '/mystery.jpeg' %}');">
+                        <span class="txt">Mystery</span>
+                    </li>
+                    <li onclick="navigation('categories/Romance')" class="cat-cnt-itm"
+                        style="background-image: url('{% static '/romance.jpeg' %}');">
+                        <span class="txt">Romance</span>
+                    </li>
+                    <li onclick="navigation('categories/SciFi')" class="cat-cnt-itm"
+                        style="background-image: url('{% static '/scifi.jpeg' %}');">
+                        <span class="txt">SciFi</span>
+                    </li>
+                    <li onclick="navigation('categories/Thriller')" class="cat-cnt-itm"
+                        style="background-image: url('{% static '/thriller.jpeg' %}');">
+                        <span class="txt">Thriller</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="lst-mov-itm">
+                <div class="hed"> Movies.
+                    <a href="/movies" class="more">more</a>
+                    <span class="scroll"><i id="b" class="fa-solid fa-chevron-left fa-xs"></i> &nbsp; &nbsp;<i id="n"
+                            class="fa-solid fa-chevron-right fa-xs"></i></span>
+                </div>
+                <ul class="cnt">
+                    {% for i in movies %}
+                    <li class="cnt-itm"
+                        style="background-image: url('/media/{{i.mov_img}}');">
+                        <span class="txt" onclick="navigation('play/{{i.id}}')">Watch Now</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="lst-mov-itm">
+                <div class="hed">Series.
+                    <a href="/series" class="more">more</a>
+                    <span class="scroll"><i id="b" class="fa-solid fa-chevron-left fa-xs"></i> &nbsp; &nbsp;<i id="n"
+                            class="fa-solid fa-chevron-right fa-xs"></i></span>
+                </div>
+                <ul class="cnt">
+
+
+                    {% for i in series %}
+                        
+                    <li class="cnt-itm"
+                        style="background-image: url('/media/{{i.1}}');">
+                        <span class="txt" onclick="navigation('play_se/{{i.0}}')">Watch Now</span>
+                    </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </main>
+
+
+
+
+
+    <script>
+        
+        function navigation(route) {
+            window.open(`http://192.168.18.9:1234/${route}`, "_self");
+        }
+
+        document.querySelector('.nav-menu').addEventListener('click', () => {
+            document.querySelector('.nav-menu').classList.toggle('open')
+            document.querySelector('.menu-cont').classList.toggle('open')
+            document.querySelector('.menu-cont-itms').classList.toggle('open')
+        })
+
+        document.getElementById('b').addEventListener('click', () => {
+            document.querySelector('.cnt').scrollBy(-250, 0)
+        })
+        document.getElementById('n').addEventListener('click', () => {
+            document.querySelector('.cnt').scrollBy(250, 0)
+        })
+    </script>
+</body>
+
+</html>

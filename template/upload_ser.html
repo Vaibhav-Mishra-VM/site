@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <script src="https://kit.fontawesome.com/55b646fe91.js" crossorigin="anonymous"></script>
+    <title>Series Upload</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Unica+One&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+    *{
+        margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: "Unica One", cursive;
+            transition: 1.2s ease-in-out;
+            outline: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            scroll-behavior: smooth;
+    }
+    body{
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #070618;
+    }
+    .form-content{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .inp{
+        padding: 10px;
+        width: 300px;
+        /* border-radius: 10px; */
+        color: white;
+        outline: none;
+        background-color: inherit;
+        font-family: poppins;
+        border: none;
+        border-bottom: 1px solid #FE7C7C;
+    }
+    .inp::placeholder{
+        color: grey;
+    }
+    .smt{
+        padding:10px 30px;
+        background-color: #FE7C7C;
+        border-radius: 20px;
+        border: none;
+        cursor: pointer;
+        color: #070618;
+        font-weight: 600;
+    }
+    .nav-title {
+            font-family: "Unica One";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 38px;
+            color: #FFFFFF;
+        }
+        .nav-title .nav-title-sub {
+            font-family: "Poppins", sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 21px;
+            color: #FE7C7C;
+        }
+        p{
+            font-family: poppins;
+            color: grey;
+            font-size: 10px;
+        }
+        .lnk{
+            color: #FE7C7C;
+            font-family: inherit;
+            cursor: pointer;
+        }
+        ::-webkit-scrollbar{
+            width: 0px;
+        }
+        label{
+            color: grey;
+            font-family: poppins;
+            padding-left: 10px;
+            word-wrap: break-word   ;
+            width: 300px;
+        }
+        .cont{
+            display: flex;
+            align-items: start;
+            justify-content: center;
+            flex-direction: column;
+            /* justify-content: flex-start; */
+            font-size: 13px;
+        }
+        .lnk{
+            color: #FE7C7C;
+            font-family: inherit;
+            cursor: pointer;
+        }
+         .back{
+            position: absolute;
+            width: 40px;
+            height:40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: 10px;
+            text-decoration: none;
+            left: 10px;
+            color: #FE7C7C;
+            padding: 10px;
+            /* color: white; */
+            border: 2px solid #FE7C7C;
+            border-radius: 50%;
+            z-index: 10000000000000;
+        }
+    
+    </style>
+</head>
+<body>
+<a href="/" class="back"><i class="fa-solid fa-arrow-left"></i></a>
+    <div class="content">
+        <form action="/upload_se" method="post" class="form-content" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="nav-title">
+                Upload.<span class="nav-title-sub">Series</span>
+            </div>
+            <input class="inp" type="text" name="moviename" placeholder="Series Name">
+            <input class="inp" type="text" name="moviedesc" placeholder="Series Description">
+            <input class="inp" type="url" name="trailer" placeholder="Trailer URL">
+            <div class="cont">
+                <label for="img">Series Category (Action , Adventure , Animation , Comedy , Crime , Drama , Documentary , Fantasy , Historical , Horror , Mystery , Romance , SciFi , Thriller) Enter exactly maximum of 3 categories seperated by commas :</label>
+                <input class="inp" type="text" name="cat" placeholder="Series Category" id="img">
+            </div>
+            <div class="cont">
+                <label for="img">Series Image</label>   
+                <input class="inp" type="file" name="mimage" placeholder="Series Image" id="img">
+            </div>
+            <div class="cont">
+                <label for="img">Series Poster</label>
+                <input class="inp" type="file" name="poster"  placeholder="Series Poster">
+            </div>
+            <div class="cont">
+                <label for="img">Series Videos</label>
+                <input class="inp" type="file" multiple name="video" placeholder="Seires Videos">
+            </div>
+            
+            
+            
+            <p>Want to Upload Movie? <a href="/upload" class="lnk">Upload Movie</a></p>
+            <input class="smt" type="submit" value="Upload">
+        </form>
+    </div>
+
+    
+</body>
+</html>

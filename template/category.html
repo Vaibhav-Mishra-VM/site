@@ -1,0 +1,243 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/55b646fe91.js" crossorigin="anonymous"></script>
+    <title>Categories</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Unica+One&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: "Unica One", cursive;
+            transition: 1.2s ease-in-out;
+            outline: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            background-color: #070618;
+            overflow-x: hidden;
+        }
+
+        main {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        main .container {
+            width: 90%;
+            height: 100vh;
+            color: white;
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        main .container .lst-mov-itm {
+            width: 99%;
+            height: 95vh;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding-top: 10px;
+            border-radius: 10px;
+        }
+
+        main .container .lst-mov-itm .hed {
+            width: 100%;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            padding-left: 40px;
+            margin-bottom: 20px;
+        }
+
+        main .container .lst-mov-itm .hed .more {
+            display: flex;
+            height: 100%;
+            padding-bottom: 5px;
+            align-items: end;
+            font-size: 12px;
+            color: #FE7C7C;
+            text-decoration: none;
+        }
+
+        main .container .lst-mov-itm .hed .scroll {
+            margin-left: auto;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            color: #FE7C7C;
+        }
+
+        main .container .lst-mov-itm .hed .scroll i {
+            cursor: pointer;
+        }
+
+        main .container .lst-mov-itm .cnt {
+            width: 100%;
+            height: 90vh;
+            display: flex;
+            align-items: start;
+            padding-left: 20px;
+            padding-right: 20px;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            transition: 1s ease-in-out;
+            border: none;
+            overflow-y: scroll;
+            padding-bottom: 20px;
+        }
+
+        main .container .lst-mov-itm .cnt .cat-cnt-itm {
+            min-width: 250px;
+            max-width: 250px;
+            height: 300px;
+            color: black;
+            list-style-type: none;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        main .container .lst-mov-itm .cnt .cat-cnt-itm .txt {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: auto;
+            margin-bottom: 12px;
+            border-radius: 2px;
+            word-wrap: break-word;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .back{
+            position: absolute;
+            width: 40px;
+            height:40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: 10px;
+            text-decoration: none;
+            left: 10px;
+            color: #FE7C7C;
+            padding: 10px;
+            /* color: white; */
+            border: 2px solid #FE7C7C;
+            border-radius: 50%;
+        }
+        ::-webkit-scrollbar {
+            width: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/" class="back"><i class="fa-solid fa-arrow-left"></i></a>
+    <main class="home">
+        <div class="container">
+            <div class="lst-mov-itm">
+                <div class="hed"> Categories
+                    
+                    <span class="scroll"><i id="b" class="fa-solid fa-chevron-up fa-xs"></i> &nbsp; &nbsp;<i id="n"
+                            class="fa-solid fa-chevron-down fa-xs"></i></span>
+                </div>
+                <ul class="cnt">
+                    <li onclick="navigation('categories/Action')" class="cat-cnt-itm" style="background-image: url('{% static '/action.jpeg' %}');">
+                        <span class="txt">Action</span>
+                    </li>
+                    <li onclick="navigation('categories/Adventure')" class="cat-cnt-itm" style="background-image: url('{% static '/adventure.png' %}');">
+                        <span class="txt">Adventure</span>
+                    </li>
+                    <li onclick="navigation('categories/Animation')" class="cat-cnt-itm" style="background-image: url('{% static '/animation.jpeg' %}');">
+                        <span class="txt">Animation</span>
+                    </li>
+                    <li onclick="navigation('categories/COmedy')" class="cat-cnt-itm" style="background-image: url('{% static '/comedy.jpeg' %}');">
+                        <span class="txt">Comedy</span>
+                    </li>
+                    <li onclick="navigation('categories/Crime')" class="cat-cnt-itm" style="background-image: url('{% static '/crime.jpeg' %}');">
+                        <span class="txt">Crime</span>
+                    </li>
+                    <li onclick="navigation('categories/Drama')" class="cat-cnt-itm" style="background-image: url('{% static '/drama.jpeg' %}');">
+                        <span class="txt">Drama</span>
+                    </li>
+                    <li onclick="navigation('categories/DOcumentary')" class="cat-cnt-itm"
+                        style="background-image: url('{% static '/documentary.jpeg' %}');">
+                        <span class="txt">Documentary</span>
+                    </li>
+                    <li onclick="navigation('categories/Fantasy')" class="cat-cnt-itm"
+                        style="background-image: url('{% static '/fantasy.jpeg' %}');">
+                        <span class="txt">Fantasy</span>
+                    </li>
+                    <li onclick="navigation('categories/Historical')" class="cat-cnt-itm"
+                        style="background-image: url('{% static '/historical.png' %}');">
+                        <span class="txt">Historical</span>
+                    </li>
+                    <li onclick="navigation('categories/Horror')" class="cat-cnt-itm"
+                        style="background-image: url('{% static '/horror.jpeg' %}');">
+                        <span class="txt">Horror</span>
+                    </li>
+                    <li onclick="navigation('categories/Mystery')" class="cat-cnt-itm"
+                        style="background-image: url('{% static '/mystery.jpeg' %}');">
+                        <span class="txt">Mystery</span>
+                    </li>
+                    <li onclick="navigation('categories/Romance')" class="cat-cnt-itm"
+                        style="background-image: url('{% static '/romance.jpeg' %}');">
+                        <span class="txt">Romance</span>
+                    </li>
+                    <li onclick="navigation('categories/SciFi')" class="cat-cnt-itm"
+                        style="background-image: url('{% static '/scifi.jpeg' %}');">
+                        <span class="txt">SciFi</span>
+                    </li>
+                    <li onclick="navigation('categories/Thriller')" class="cat-cnt-itm"
+                        style="background-image: url('{% static '/thriller.jpeg' %}');">
+                        <span class="txt">Thriller</span>
+                    </li>
+                </ul>
+            </div>
+    </main>
+    <script>
+        function navigation(route) {
+            window.open(`http://192.168.18.9:1234/${route}`, "_self");
+        }
+        document.getElementById('b').addEventListener('click', () => {
+            document.querySelector('.cnt').scrollBy(0, -100)
+        })
+        document.getElementById('n').addEventListener('click', () => {
+            document.querySelector('.cnt').scrollBy(0, 100)
+        })
+    </script>
+</body>
+
+</html>
